@@ -2,6 +2,7 @@
 // #include <losses.h>
 
 // IRLS function for Poisson regression
+// [[Rcpp::export]]
 arma::vec irls_poisson(
   const arma::vec& y,
   const arma::mat& X,

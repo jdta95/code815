@@ -4,4 +4,3 @@
 loss_ridge <- function(y, A, x, lambda) {
     .Call(`_code815_loss_ridge`, y, A, x, lambda)
 }
-
