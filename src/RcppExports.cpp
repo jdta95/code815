@@ -11,6 +11,22 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// irls_poisson
+arma::vec irls_poisson(const arma::vec& y, const arma::mat& X, const arma::vec& beta0, double tol, int max_iter, bool printing);
+RcppExport SEXP _code815_irls_poisson(SEXP ySEXP, SEXP XSEXP, SEXP beta0SEXP, SEXP tolSEXP, SEXP max_iterSEXP, SEXP printingSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::vec& >::type y(ySEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type beta0(beta0SEXP);
+    Rcpp::traits::input_parameter< double >::type tol(tolSEXP);
+    Rcpp::traits::input_parameter< int >::type max_iter(max_iterSEXP);
+    Rcpp::traits::input_parameter< bool >::type printing(printingSEXP);
+    rcpp_result_gen = Rcpp::wrap(irls_poisson(y, X, beta0, tol, max_iter, printing));
+    return rcpp_result_gen;
+END_RCPP
+}
 // loss_ridge
 double loss_ridge(const arma::vec& y, const arma::mat& A, const arma::vec& x, double lambda);
 RcppExport SEXP _code815_loss_ridge(SEXP ySEXP, SEXP ASEXP, SEXP xSEXP, SEXP lambdaSEXP) {
@@ -27,6 +43,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_code815_irls_poisson", (DL_FUNC) &_code815_irls_poisson, 6},
     {"_code815_loss_ridge", (DL_FUNC) &_code815_loss_ridge, 4},
     {NULL, NULL, 0}
 };
