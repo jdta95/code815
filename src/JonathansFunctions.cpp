@@ -92,14 +92,19 @@ arma::vec irls_poisson(
 //
 
 /*** R
+# compile package
+Rcpp::compileAttributes()
+# load in library for testing
+devtools::load_all()
+
 # simulate Poisson distributed data for a Poisson regression
 set.seed(123)
-n = 100
-p = 3
-X = cbind(1, matrix(rnorm(n * p), n, p))
-beta = c(0.5, 1, -1, 0.5)
+n = 1000
+p = 4
+X = cbind(1, matrix(rnorm(n * (p - 1)), n, p - 1))
+beta = rnorm(p)
 y = rpois(n, lambda = exp(X %*% beta))
 beta0 = rep(0, p)
 
-beta_hat = irls_poisson(y, X, beta0)
+beta_hat = code815::irls_poisson(y, X, beta0)
 */
