@@ -42,61 +42,16 @@ arma::vec irls_poisson(
   return beta;
 }
 
-
-// Rcpp::List gradient_descent_BB_lsq(
-//   const arma::vec& y,
-//   const arma::mat& A,
-//   const arma::vec& x0,
-//   double lambda,
-//   double tol = 0.0001,
-//   int max.iter = 10000,
-//   bool printing = FALSE
-// ) {
-//   int n = y.n_elem;
-//   int p = A.n_cols;
-//   // stopifnot(n == nrow(A))
-//   // stopifnot(n >= p)
-//   
-//   arma::mat AA = A.t() * A;
-//   arma::mat Ay = A.t() * y;
-//   arma::vec grad = AA * x0 - Ay;
-//   
-//   double loss = loss_ridge(y, A, x0, lambda);
-//   arma::vec = grad + 2 * lambda * x0;
-//   
-//   arma::vec x = x0 - grad;
-//   arma::vec prevx = x0;
-//   arma::vec prevgrad = grad;
-//   arma::vec prevloss = loss;
-//   int iter = 0;
-//   double diff = inf;
-//   
-//   
-//   
-//   
-//   
-//   
-//   
-//   
-//   
-//   
-//   
-//   
-//   return 
-// }
-
-
-// You can include R code blocks in C++ files processed with sourceCpp
-// (useful for testing and development). The R code will be automatically 
-// run after the compilation.
-//
-
+// compile package and load in library for testing
 /*** R
 # compile package
 Rcpp::compileAttributes()
 # load in library for testing
 devtools::load_all()
+*/
 
+// test the irls_poisson function
+/*** R
 # simulate Poisson distributed data for a Poisson regression
 set.seed(123)
 n = 1000
@@ -106,5 +61,6 @@ beta = rnorm(p)
 y = rpois(n, lambda = exp(X %*% beta))
 beta0 = rep(0, p)
 
-beta_hat = code815::irls_poisson(y, X, beta0)
+# test irls_poisson function
+beta_hat = code815::irls_poisson(y, X, beta0 = rep(0, p))
 */
