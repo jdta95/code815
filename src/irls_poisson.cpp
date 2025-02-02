@@ -11,11 +11,16 @@ arma::vec irls_poisson(
   int max_iter = 10000,
   bool printing = false
 ) {
-  int n = y.n_elem;
-  int p = X.n_cols;
+  arma::uword n = y.n_elem;
+  arma::uword p = X.n_cols;
   
-  // stopifnot(n == nrow(X))
-  // stopifnot(n >= p)
+  if (n != X.n_rows) {
+    Rcpp::stop("y and X must have the same number of rows.");
+  }
+  
+  if (n < p) {
+    Rcpp::stop("y must have at least as many rows as columns in X.");
+  }
   
   arma::vec beta = beta0;
   

@@ -12,8 +12,8 @@ Rcpp::List gradient_descent_BB_lsq(
   int max_iter = 10000,
   bool printing = false
 ) {
-  int n = y.n_elem;
-  int p = A.n_cols;
+  arma::uword n = y.n_elem;
+  arma::uword p = A.n_cols;
   
   if (n != A.n_rows) {
     Rcpp::stop("y and A must have the same number of rows.");
