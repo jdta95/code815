@@ -11,6 +11,47 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// RWM_gaussian_mixture
+arma::vec RWM_gaussian_mixture(int n, double x0, double mu1, double mu2, double sigma1, double sigma2, double w1, double w2, double qsigma, double seed);
+RcppExport SEXP _code815_RWM_gaussian_mixture(SEXP nSEXP, SEXP x0SEXP, SEXP mu1SEXP, SEXP mu2SEXP, SEXP sigma1SEXP, SEXP sigma2SEXP, SEXP w1SEXP, SEXP w2SEXP, SEXP qsigmaSEXP, SEXP seedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< double >::type x0(x0SEXP);
+    Rcpp::traits::input_parameter< double >::type mu1(mu1SEXP);
+    Rcpp::traits::input_parameter< double >::type mu2(mu2SEXP);
+    Rcpp::traits::input_parameter< double >::type sigma1(sigma1SEXP);
+    Rcpp::traits::input_parameter< double >::type sigma2(sigma2SEXP);
+    Rcpp::traits::input_parameter< double >::type w1(w1SEXP);
+    Rcpp::traits::input_parameter< double >::type w2(w2SEXP);
+    Rcpp::traits::input_parameter< double >::type qsigma(qsigmaSEXP);
+    Rcpp::traits::input_parameter< double >::type seed(seedSEXP);
+    rcpp_result_gen = Rcpp::wrap(RWM_gaussian_mixture(n, x0, mu1, mu2, sigma1, sigma2, w1, w2, qsigma, seed));
+    return rcpp_result_gen;
+END_RCPP
+}
+// RWM_truncated_gaussian_mixture
+arma::vec RWM_truncated_gaussian_mixture(int n, double x0, double mu1, double mu2, double sigma1, double sigma2, double w1, double w2, double qsigma, double radius, double seed);
+RcppExport SEXP _code815_RWM_truncated_gaussian_mixture(SEXP nSEXP, SEXP x0SEXP, SEXP mu1SEXP, SEXP mu2SEXP, SEXP sigma1SEXP, SEXP sigma2SEXP, SEXP w1SEXP, SEXP w2SEXP, SEXP qsigmaSEXP, SEXP radiusSEXP, SEXP seedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< double >::type x0(x0SEXP);
+    Rcpp::traits::input_parameter< double >::type mu1(mu1SEXP);
+    Rcpp::traits::input_parameter< double >::type mu2(mu2SEXP);
+    Rcpp::traits::input_parameter< double >::type sigma1(sigma1SEXP);
+    Rcpp::traits::input_parameter< double >::type sigma2(sigma2SEXP);
+    Rcpp::traits::input_parameter< double >::type w1(w1SEXP);
+    Rcpp::traits::input_parameter< double >::type w2(w2SEXP);
+    Rcpp::traits::input_parameter< double >::type qsigma(qsigmaSEXP);
+    Rcpp::traits::input_parameter< double >::type radius(radiusSEXP);
+    Rcpp::traits::input_parameter< double >::type seed(seedSEXP);
+    rcpp_result_gen = Rcpp::wrap(RWM_truncated_gaussian_mixture(n, x0, mu1, mu2, sigma1, sigma2, w1, w2, qsigma, radius, seed));
+    return rcpp_result_gen;
+END_RCPP
+}
 // gradient_descent_BB_lsq
 Rcpp::List gradient_descent_BB_lsq(const arma::vec& y, const arma::mat& A, const arma::vec& x0, double lambda, double tol, int max_iter, bool printing);
 RcppExport SEXP _code815_gradient_descent_BB_lsq(SEXP ySEXP, SEXP ASEXP, SEXP x0SEXP, SEXP lambdaSEXP, SEXP tolSEXP, SEXP max_iterSEXP, SEXP printingSEXP) {
@@ -60,6 +101,8 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_code815_RWM_gaussian_mixture", (DL_FUNC) &_code815_RWM_gaussian_mixture, 10},
+    {"_code815_RWM_truncated_gaussian_mixture", (DL_FUNC) &_code815_RWM_truncated_gaussian_mixture, 11},
     {"_code815_gradient_descent_BB_lsq", (DL_FUNC) &_code815_gradient_descent_BB_lsq, 7},
     {"_code815_irls_poisson", (DL_FUNC) &_code815_irls_poisson, 6},
     {"_code815_loss_ridge", (DL_FUNC) &_code815_loss_ridge, 4},
