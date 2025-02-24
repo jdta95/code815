@@ -11,6 +11,28 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// BayesGPRegARD
+arma::mat BayesGPRegARD(arma::vec Y, arma::mat X, double sigmasq_start, double tausq_start, arma::vec phi_start, double alpha_s, double beta_s, double alpha_t, double beta_t, arma::vec lower, arma::vec upper, int mcmc);
+RcppExport SEXP _code815_BayesGPRegARD(SEXP YSEXP, SEXP XSEXP, SEXP sigmasq_startSEXP, SEXP tausq_startSEXP, SEXP phi_startSEXP, SEXP alpha_sSEXP, SEXP beta_sSEXP, SEXP alpha_tSEXP, SEXP beta_tSEXP, SEXP lowerSEXP, SEXP upperSEXP, SEXP mcmcSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type Y(YSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type X(XSEXP);
+    Rcpp::traits::input_parameter< double >::type sigmasq_start(sigmasq_startSEXP);
+    Rcpp::traits::input_parameter< double >::type tausq_start(tausq_startSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type phi_start(phi_startSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha_s(alpha_sSEXP);
+    Rcpp::traits::input_parameter< double >::type beta_s(beta_sSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha_t(alpha_tSEXP);
+    Rcpp::traits::input_parameter< double >::type beta_t(beta_tSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type lower(lowerSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type upper(upperSEXP);
+    Rcpp::traits::input_parameter< int >::type mcmc(mcmcSEXP);
+    rcpp_result_gen = Rcpp::wrap(BayesGPRegARD(Y, X, sigmasq_start, tausq_start, phi_start, alpha_s, beta_s, alpha_t, beta_t, lower, upper, mcmc));
+    return rcpp_result_gen;
+END_RCPP
+}
 // RWM_gaussian_mixture
 arma::vec RWM_gaussian_mixture(int n, double x0, double mu1, double mu2, double sigma1, double sigma2, double w1, double w2, double qsigma, double seed);
 RcppExport SEXP _code815_RWM_gaussian_mixture(SEXP nSEXP, SEXP x0SEXP, SEXP mu1SEXP, SEXP mu2SEXP, SEXP sigma1SEXP, SEXP sigma2SEXP, SEXP w1SEXP, SEXP w2SEXP, SEXP qsigmaSEXP, SEXP seedSEXP) {
@@ -101,6 +123,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_code815_BayesGPRegARD", (DL_FUNC) &_code815_BayesGPRegARD, 12},
     {"_code815_RWM_gaussian_mixture", (DL_FUNC) &_code815_RWM_gaussian_mixture, 10},
     {"_code815_RWM_truncated_gaussian_mixture", (DL_FUNC) &_code815_RWM_truncated_gaussian_mixture, 11},
     {"_code815_gradient_descent_BB_lsq", (DL_FUNC) &_code815_gradient_descent_BB_lsq, 7},
