@@ -13,8 +13,8 @@ p = 5
 l = 0.00001
 u = 2
 
-sigmasq = 1 / rgamma(1, shape = alpha_s, shape = beta_s)
-tausq = 1 / rgamma(1, shape = alpha_t, shape = beta_t)
+sigmasq = 1 / rgamma(1, shape = alpha_s, scale = beta_s)
+tausq = 1 / rgamma(1, shape = alpha_t, scale = beta_t)
 phi = runif(p, min = l, max = u)
 
 # Generate data
@@ -48,13 +48,13 @@ post_samples = code815::BayesGPRegARD(
   mcmc = 1000
 )
 
-plot(post_samples[, 1], type = "l", main = "Posterior samples of sigmasq", ylab = "sigmasq", xlab = "Iteration")
-plot(post_samples[, 2], type = "l", main = "Posterior samples of tausq", ylab = "tausq", xlab = "Iteration")
-plot(post_samples[, 3], type = "l", main = "Posterior samples of phi", ylab = "phi1", xlab = "Iteration")
-plot(post_samples[, 4], type = "l", main = "Posterior samples of phi", ylab = "phi2", xlab = "Iteration")
-plot(post_samples[, 5], type = "l", main = "Posterior samples of phi", ylab = "phi3", xlab = "Iteration")
-plot(post_samples[, 6], type = "l", main = "Posterior samples of phi", ylab = "phi4", xlab = "Iteration")
-plot(post_samples[, 7], type = "l", main = "Posterior samples of phi", ylab = "phi5", xlab = "Iteration")
+plot(post_samples[200:1000, 1], type = "l", main = "Posterior samples of sigmasq", ylab = "sigmasq", xlab = "Iteration")
+plot(post_samples[200:1000, 2], type = "l", main = "Posterior samples of tausq", ylab = "tausq", xlab = "Iteration")
+plot(post_samples[200:1000, 3], type = "l", main = "Posterior samples of phi", ylab = "phi1", xlab = "Iteration")
+plot(post_samples[200:1000, 4], type = "l", main = "Posterior samples of phi", ylab = "phi2", xlab = "Iteration")
+plot(post_samples[200:1000, 5], type = "l", main = "Posterior samples of phi", ylab = "phi3", xlab = "Iteration")
+plot(post_samples[200:1000, 6], type = "l", main = "Posterior samples of phi", ylab = "phi4", xlab = "Iteration")
+plot(post_samples[200:1000, 7], type = "l", main = "Posterior samples of phi", ylab = "phi5", xlab = "Iteration")
 
 estimates = apply(post_samples[200:1000,], 2, mean)
 estimates
