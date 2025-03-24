@@ -60,6 +60,74 @@ double GP_log_density(
   return log_likelihood;
 }
 
+
+//[[Rcpp::export]]
+arma::mat BayesGPRegARD2(
+    arma::vec Y,
+    arma::mat X,
+    double sigmasq_start,
+    double tausq_start,
+    arma::vec phi_start,
+    arma::vec lower,
+    arma::vec upper,
+    int mcmc=1000
+){
+  
+  int p = phi_start.n_elem;
+  arma::mat samples = arma::zeros(mcmc, p + 2);
+  arma::mat theta_bounds = arma::zeros(p + 2, 2);
+  theta_bounds.col(0) = lower;
+  theta_bounds.col(1) = upper;
+  
+  arma::vec sigmasq_cur = sigmasq_start * arma::eye(1, 1);
+  arma::vec tausq_cur = tausq_start * arma::eye(1, 1);
+  arma::vec phi_cur = phi_start;
+  arma::vec theta_cur = arma::join_cols(sigmasq_cur, tausq_cur, phi_cur);
+  
+  arma::mat theta_metrop_sd = 0.05 * arma::eye(p + 2, p + 2);
+  RAMAdapt theta_adapt(p + 2, theta_metrop_sd, 0.24);
+  
+  for(int i=0; i<mcmc; i++){
+    
+    
+    theta_adapt.count_proposal();
+    
+    Rcpp::RNGScope scope;
+    arma::vec U_update = arma::randn(p + 2);
+    
+    arma::vec theta_alt = par_huvtransf_back(par_huvtransf_fwd(
+      theta_cur, theta_bounds) + theta_adapt.paramsd * U_update, theta_bounds);
+    
+    double curr_logdens_GP = GP_log_density(Y, X, theta_cur, p);
+    
+    double curr_logdens = curr_logdens_GP;
+    
+    double prop_logdens_GP = GP_log_density(Y, X, theta_alt, p);
+    double prop_logdens = prop_logdens_GP;
+    
+    // make move
+    double jacobian  = calc_jacobian(theta_alt, theta_cur, theta_bounds);
+    double logaccept = prop_logdens - curr_logdens + jacobian;
+    
+    bool accepted = do_I_accept(logaccept);
+    
+    if(accepted){
+      theta_cur = theta_alt;
+    } 
+    
+    theta_adapt.update_ratios();
+    
+    if(true){
+      theta_adapt.adapt(U_update, exp(logaccept), i); 
+    }
+    
+    samples.row(i) = theta_cur.t();
+  }
+  
+  return samples;
+  
+}
+
 //[[Rcpp::export]]
 arma::mat BayesGPRegARD(
     arma::vec Y,

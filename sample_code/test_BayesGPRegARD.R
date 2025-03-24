@@ -33,20 +33,31 @@ C = X %*% diag(1000000, p) %*% t(X) + sigmasq * exp(-0.5 * K) + tausq * diag(1, 
 
 Y = rnorm(n, rep(0, n), C)
 
-post_samples = code815::BayesGPRegARD(
+post_samples = code815::BayesGPRegARD2(
   Y,
   X,
   sigmasq_start = 1,
   tausq_start = 1,
   phi_start = rep(1, p),
-  alpha_s = 1,
-  beta_s = 1,
-  alpha_t = 1,
-  beta_t = 1,
   lower = rep(l, p + 2),
   upper = c(Inf, Inf, rep(u, p)),
   mcmc = 1000
 )
+
+# post_samples = code815::BayesGPRegARD(
+#   Y,
+#   X,
+#   sigmasq_start = 1,
+#   tausq_start = 1,
+#   phi_start = rep(1, p),
+#   alpha_s = 1,
+#   beta_s = 1,
+#   alpha_t = 1,
+#   beta_t = 1,
+#   lower = rep(l, p + 2),
+#   upper = c(Inf, Inf, rep(u, p)),
+#   mcmc = 1000
+# )
 
 plot(post_samples[200:1000, 1], type = "l", main = "Posterior samples of sigmasq", ylab = "sigmasq", xlab = "Iteration")
 plot(post_samples[200:1000, 2], type = "l", main = "Posterior samples of tausq", ylab = "tausq", xlab = "Iteration")

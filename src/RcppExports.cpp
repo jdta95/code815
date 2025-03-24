@@ -11,6 +11,24 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// BayesGPRegARD2
+arma::mat BayesGPRegARD2(arma::vec Y, arma::mat X, double sigmasq_start, double tausq_start, arma::vec phi_start, arma::vec lower, arma::vec upper, int mcmc);
+RcppExport SEXP _code815_BayesGPRegARD2(SEXP YSEXP, SEXP XSEXP, SEXP sigmasq_startSEXP, SEXP tausq_startSEXP, SEXP phi_startSEXP, SEXP lowerSEXP, SEXP upperSEXP, SEXP mcmcSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type Y(YSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type X(XSEXP);
+    Rcpp::traits::input_parameter< double >::type sigmasq_start(sigmasq_startSEXP);
+    Rcpp::traits::input_parameter< double >::type tausq_start(tausq_startSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type phi_start(phi_startSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type lower(lowerSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type upper(upperSEXP);
+    Rcpp::traits::input_parameter< int >::type mcmc(mcmcSEXP);
+    rcpp_result_gen = Rcpp::wrap(BayesGPRegARD2(Y, X, sigmasq_start, tausq_start, phi_start, lower, upper, mcmc));
+    return rcpp_result_gen;
+END_RCPP
+}
 // BayesGPRegARD
 arma::mat BayesGPRegARD(arma::vec Y, arma::mat X, double sigmasq_start, double tausq_start, arma::vec phi_start, double alpha_s, double beta_s, double alpha_t, double beta_t, arma::vec lower, arma::vec upper, int mcmc);
 RcppExport SEXP _code815_BayesGPRegARD(SEXP YSEXP, SEXP XSEXP, SEXP sigmasq_startSEXP, SEXP tausq_startSEXP, SEXP phi_startSEXP, SEXP alpha_sSEXP, SEXP beta_sSEXP, SEXP alpha_tSEXP, SEXP beta_tSEXP, SEXP lowerSEXP, SEXP upperSEXP, SEXP mcmcSEXP) {
@@ -30,6 +48,46 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::vec >::type upper(upperSEXP);
     Rcpp::traits::input_parameter< int >::type mcmc(mcmcSEXP);
     rcpp_result_gen = Rcpp::wrap(BayesGPRegARD(Y, X, sigmasq_start, tausq_start, phi_start, alpha_s, beta_s, alpha_t, beta_t, lower, upper, mcmc));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Bayes_Poisson
+Rcpp::List Bayes_Poisson(const arma::vec& y, const arma::mat& X, const arma::vec& beta0, double step, const int& mcmc);
+RcppExport SEXP _code815_Bayes_Poisson(SEXP ySEXP, SEXP XSEXP, SEXP beta0SEXP, SEXP stepSEXP, SEXP mcmcSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::vec& >::type y(ySEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type beta0(beta0SEXP);
+    Rcpp::traits::input_parameter< double >::type step(stepSEXP);
+    Rcpp::traits::input_parameter< const int& >::type mcmc(mcmcSEXP);
+    rcpp_result_gen = Rcpp::wrap(Bayes_Poisson(y, X, beta0, step, mcmc));
+    return rcpp_result_gen;
+END_RCPP
+}
+// GP_Gibbs
+Rcpp::List GP_Gibbs(arma::vec Y, arma::mat X, double sigmasq_start, double tausq_start, arma::vec phi_start, arma::vec w_start, arma::vec beta_start, arma::mat V, double a_s, double b_s, double a_t, double b_t, arma::vec lower, arma::vec upper, int mcmc);
+RcppExport SEXP _code815_GP_Gibbs(SEXP YSEXP, SEXP XSEXP, SEXP sigmasq_startSEXP, SEXP tausq_startSEXP, SEXP phi_startSEXP, SEXP w_startSEXP, SEXP beta_startSEXP, SEXP VSEXP, SEXP a_sSEXP, SEXP b_sSEXP, SEXP a_tSEXP, SEXP b_tSEXP, SEXP lowerSEXP, SEXP upperSEXP, SEXP mcmcSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type Y(YSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type X(XSEXP);
+    Rcpp::traits::input_parameter< double >::type sigmasq_start(sigmasq_startSEXP);
+    Rcpp::traits::input_parameter< double >::type tausq_start(tausq_startSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type phi_start(phi_startSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type w_start(w_startSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type beta_start(beta_startSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type V(VSEXP);
+    Rcpp::traits::input_parameter< double >::type a_s(a_sSEXP);
+    Rcpp::traits::input_parameter< double >::type b_s(b_sSEXP);
+    Rcpp::traits::input_parameter< double >::type a_t(a_tSEXP);
+    Rcpp::traits::input_parameter< double >::type b_t(b_tSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type lower(lowerSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type upper(upperSEXP);
+    Rcpp::traits::input_parameter< int >::type mcmc(mcmcSEXP);
+    rcpp_result_gen = Rcpp::wrap(GP_Gibbs(Y, X, sigmasq_start, tausq_start, phi_start, w_start, beta_start, V, a_s, b_s, a_t, b_t, lower, upper, mcmc));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -71,6 +129,22 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type radius(radiusSEXP);
     Rcpp::traits::input_parameter< double >::type seed(seedSEXP);
     rcpp_result_gen = Rcpp::wrap(RWM_truncated_gaussian_mixture(n, x0, mu1, mu2, sigma1, sigma2, w1, w2, qsigma, radius, seed));
+    return rcpp_result_gen;
+END_RCPP
+}
+// VI_normal
+arma::mat VI_normal(const arma::vec& X, double mumu0, double musigma0, double A0, double B0, double tol);
+RcppExport SEXP _code815_VI_normal(SEXP XSEXP, SEXP mumu0SEXP, SEXP musigma0SEXP, SEXP A0SEXP, SEXP B0SEXP, SEXP tolSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::vec& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< double >::type mumu0(mumu0SEXP);
+    Rcpp::traits::input_parameter< double >::type musigma0(musigma0SEXP);
+    Rcpp::traits::input_parameter< double >::type A0(A0SEXP);
+    Rcpp::traits::input_parameter< double >::type B0(B0SEXP);
+    Rcpp::traits::input_parameter< double >::type tol(tolSEXP);
+    rcpp_result_gen = Rcpp::wrap(VI_normal(X, mumu0, musigma0, A0, B0, tol));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -121,14 +195,35 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// rwm
+arma::vec rwm(double xstart, double alpha, double beta, int mcmc, double lower, double upper);
+RcppExport SEXP _code815_rwm(SEXP xstartSEXP, SEXP alphaSEXP, SEXP betaSEXP, SEXP mcmcSEXP, SEXP lowerSEXP, SEXP upperSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type xstart(xstartSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< double >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< int >::type mcmc(mcmcSEXP);
+    Rcpp::traits::input_parameter< double >::type lower(lowerSEXP);
+    Rcpp::traits::input_parameter< double >::type upper(upperSEXP);
+    rcpp_result_gen = Rcpp::wrap(rwm(xstart, alpha, beta, mcmc, lower, upper));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_code815_BayesGPRegARD2", (DL_FUNC) &_code815_BayesGPRegARD2, 8},
     {"_code815_BayesGPRegARD", (DL_FUNC) &_code815_BayesGPRegARD, 12},
+    {"_code815_Bayes_Poisson", (DL_FUNC) &_code815_Bayes_Poisson, 5},
+    {"_code815_GP_Gibbs", (DL_FUNC) &_code815_GP_Gibbs, 15},
     {"_code815_RWM_gaussian_mixture", (DL_FUNC) &_code815_RWM_gaussian_mixture, 10},
     {"_code815_RWM_truncated_gaussian_mixture", (DL_FUNC) &_code815_RWM_truncated_gaussian_mixture, 11},
+    {"_code815_VI_normal", (DL_FUNC) &_code815_VI_normal, 6},
     {"_code815_gradient_descent_BB_lsq", (DL_FUNC) &_code815_gradient_descent_BB_lsq, 7},
     {"_code815_irls_poisson", (DL_FUNC) &_code815_irls_poisson, 6},
     {"_code815_loss_ridge", (DL_FUNC) &_code815_loss_ridge, 4},
+    {"_code815_rwm", (DL_FUNC) &_code815_rwm, 6},
     {NULL, NULL, 0}
 };
 
